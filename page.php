@@ -2,8 +2,31 @@
 <html>
 <head>
     <title>数据库显示</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        table
+        {
+            table-layout:fixed;
+            border: 1px solid black;
+            width: 100%;
+        }
+        th,td{
+            text-align: left;
+            border: 1px solid black;
+            width: 150px;
+            height: 30px;
+            /*word-break:break-all;*/
+            white-space: nowrap;
+            /*word-wrap: break-word;*/
+            text-overflow: ellipsis; 
+            overflow: hidden;  
+        }
+   
+    </style>
 </head>
 <body>
+
+
 <?php 
 //连接想要连接的数据库，localhost是本地服务器，root为数据库的账号，我的密码为0所以是空
 $con = mysqli_connect("172.16.155.11","doaj","Doa123!@#j", "doaj");
@@ -39,14 +62,54 @@ if($page > $total){
 } else{ 
  $pagenext = $page +1; 
 } 
-echo "<h3> <a href='page.php'>首页</a> 丨<a href='page.php?p={$pageprev}'>上一页</a> 丨<a href='page.php?p={$pagenext}'>下一页</a> 丨<a href='page.php?p={$total}'>尾页</a></h3>"; 
+
+
+echo "<h3> <a href='page.php'>首页</a> 丨<a href='page.php?p={$pageprev}'>上一页</a> |<a href='page.php?p={$pagenext}'>下一页</a> 丨<a href='page.php?p={$total}'>尾页</a></h3>
+    <form action='' method='get'>
+    第 $page 页 |页码：<input type='text' name='p'><input type='submit' value='跳转'>
+    </form> ";
+
 
 $sql = "select * from doaj_data order by id limit {$offset},{$pagesize}"; 
-$result = mysqli_query($con, $sql); 
-echo "<p>PHP分页代码的小模块</p>"; 
-echo "<table style='text-align:left;' border='1'>"; 
-echo "<tr><th>id</th><th>title</th><th>title_translation</th><th>abstract</th><th>abstract_translation</th><th>year</th><th>url</th><th>start_page</th><th>end_page</th><th>article_created_date</th><th>article_last_updated</th><th>journals_publisher</th><th>journals_language</th><th>journals_licenseId</th><th>journals_title</th><th>journals_country</th><th>journals_number</th><th>journals_volume</th><th>journals_issns</th><th>journals_create_date</th><th>term</th>
-         <th>term_code</th><th>term_l1</th><th>keyword</th><th>keyword_translation</th><th>author_name</th><th>author_affiliation</th><th>author_email</th><th>identifier_type</th><th>identifier_identifierId</th><th>license_type</th><th>license_title</th><th>license_url</th></tr>"; 
+$result = mysqli_query($con, $sql);
+?>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>title_translation</th>
+        <th>abstract</th>
+        <th>abstract_translation</th>
+        <th>year</th><th>url</th>
+        <th>start_page</th>
+        <th>end_page</th>
+        <th>article_created_date</th>
+        <th>article_last_updated</th>
+        <th>journals_publisher</th>
+        <th>journals_language</th>
+        <th>journals_licenseId</th>
+        <th>journals_title</th>
+        <th>journals_country</th>
+        <th>journals_number</th>
+        <th>journals_volume</th>
+        <th>journals_issns</th>
+        <th>journals_create_date</th>
+        <th>term</th>
+        <th>term_code</th>
+        <th>term_l1</th>
+        <th>keyword</th>
+        <th>keyword_translation</th>
+        <th>author_name</th>
+        <th>author_affiliation</th>
+        <th>author_email</th>
+        <th>identifier_type</th>
+        <th>identifier_identifierId</th>
+        <th>license_type</th>
+        <th>license_title</th>
+        <th>license_url</th>
+    </tr>
+<?php
 while($sql_arr = mysqli_fetch_assoc($result)){ 
         $id = $sql_arr['id'];
         $title = $sql_arr['title'];
@@ -93,7 +156,10 @@ echo "</table>";
 //  $pagenext = $page +1; 
 // } 
 // 做链接 跳转； 
-echo "<h3> <a href='page.php'>首页</a> 丨<a href='page.php?p={$pageprev}'>上一页</a> 丨<a href='page.php?p={$pagenext}'>下一页</a> 丨<a href='page.php?p={$total}'>尾页</a></h3>";  
+echo "<h3> <a href='page.php'>首页</a> 丨<a href='page.php?p={$pageprev}'>上一页</a> |<a href='page.php?p={$pagenext}'>下一页</a> 丨<a href='page.php?p={$total}'>尾页</a></h3>
+    <form action='' method='get'>
+    第 $page 页 |页码：<input type='text' name='p' cols='4'><input type='submit' value='跳转'>
+    </form> ";
  
 mysqli_free_result($result); 
 mysqli_close($con); 
