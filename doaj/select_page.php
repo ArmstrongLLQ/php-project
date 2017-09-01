@@ -71,12 +71,12 @@ $total_sql = "select COUNT(*) ".strstr($_POST['my_sql'], "from doaj_data");
 
 list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con, $total_sql, $pagesize);
 
-echo "总条数：$total_row";
+// echo "总条数：$total_row";
 
-// echo "<h3> <a href='select_page.php'>首页</a> 丨<a href='select_page.php?p={$pageprev}'>上一页</a> |<a href='select_page.php?p={$pagenext}'>下一页</a> 丨<a href='select_page.php?p={$total}'>尾页</a></h3>
-//     <form action='' method='get'>
-//     第 $page/$total 页 |页码：<input type='text' name='p'><input type='submit' value='跳转'>
-//     </form> ";
+echo "<h3> <a href='select_page.php'>首页</a> 丨<a href='select_page.php?p={$pageprev}'>上一页</a> |<a href='select_page.php?p={$pagenext}'>下一页</a> 丨<a href='select_page.php?p={$total}'>尾页</a></h3>
+    <form action='' method='get'>
+    第 $page/$total 页 |页码：<input type='text' name='p'><input type='submit' value='跳转'>
+    </form> ";
 ?>
     <div style="margin:20px 0;"></div>
     <table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 800px"
@@ -127,7 +127,7 @@ echo "总条数：$total_row";
 
 
 <?php
-$sql = $_POST['my_sql'] . " order by id";
+$sql = $_POST['my_sql'] . " order by id limit {$offset},{$pagesize}";
 $result = mysqli_query($con, $sql);
 while($sql_arr = mysqli_fetch_assoc($result)){ 
         $id = $sql_arr['id'];
