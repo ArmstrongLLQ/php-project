@@ -12,24 +12,13 @@
 <body>
 <h2>Doaj数据</h2>
 <?php
-function connectMysql($my_host, $my_username, $my_password, $my_database)
-{
-    //连接数据库
-    $con = mysqli_connect($my_host, $my_username, $my_password, $my_database);
-    mysqli_query($con, "SET NAMES 'utf8'");
-    mysqli_query($con, "SET CHARACTER SET utf8");
-    if(!$con)
-    {
-        die("连接失败: " . mysqli_connect_error());
-    }
-    return $con;
-}
+require_once "mysqlTools.php";
 
-function selectData($con, $select_sql, $pagesize)
+function selectData($conn, $select_sql, $pagesize)
 {
-    $total_result = mysqli_query($con, $select_sql); 
+    $total_result = mysqli_query($conn, $select_sql); 
     if (!$total_result) {
-     printf("Error: %s\n", mysqli_error($con));
+     printf("Error: %s\n", mysqli_error($conn));
      exit();
     }
     $total_row_arr = mysqli_fetch_row($total_result); 
@@ -60,8 +49,8 @@ function selectData($con, $select_sql, $pagesize)
     return $page_para;
 }
 
-
-$con = connectMysql("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$mysql_tools = new MysqlTools("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$conn = $mysql_tools->connectMysql();
 
 $pagesize = 100; 
 
@@ -69,23 +58,23 @@ $pagesize = 100;
 $total_sql = @$_GET['my_sql'] ? "select COUNT(*) ".strstr($_GET['my_sql'], "from doaj_data"):"select COUNT(*) from doaj_data"; 
 $chaxun = @$_GET['my_sql'] ? $_GET['my_sql'] : "";
 
-list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con, $total_sql, $pagesize);
+list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($conn, $total_sql, $pagesize);
 ?>
 
 <h3>
-    <a href='test.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
-    <a href='test.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
-    <a href='test.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
-    <a href='test.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
-    <a href='test.php'>返回</a>
+    <a href='page.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
+    <a href='page.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
+    <a href='page.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
+    <a href='page.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
+    <a href='page.php'>返回</a>
 </h3>
 
 <form action='' method='get'>
-总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：<input type="text" name="p"><input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" "><input type="submit" value="跳转">
+总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：<input type="text" name="p" style="width:50px"><input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" "><input type="submit" value="跳转">
 </form> 
 
 <div style="margin:20px 0;"></div>
-<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 800px"
+<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 100%"
         data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1 - 副本.json',method:'get'">
 <!--      <thead data-options="frozen:true">
         <tr>
@@ -134,7 +123,7 @@ list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con
 
 <?php
 $sql = @$_GET['my_sql'] ? $_GET['my_sql'] . " order by id limit {$offset},{$pagesize}" : "select * from doaj_data order by id limit {$offset},{$pagesize}"; 
-$result = mysqli_query($con, $sql);
+$result = mysqli_query($conn, $sql);
 while($sql_arr = mysqli_fetch_assoc($result)){ 
         echo "<tr>";
         foreach ($sql_arr as $value) {
@@ -152,7 +141,7 @@ while($sql_arr = mysqli_fetch_assoc($result)){
 
 <?php
 mysqli_free_result($result); 
-mysqli_close($con); 
+mysqli_close($conn); 
 ?>
 
 </body>

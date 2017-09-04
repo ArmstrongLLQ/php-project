@@ -58,24 +58,24 @@ class ExcelToArrary{
 function connectMysql($my_host, $my_username, $my_password, $my_database)
 {
     //连接数据库
-    $con = mysqli_connect($my_host, $my_username, $my_password, $my_database);
-    mysqli_query($con, "SET NAMES 'utf8'");
-    mysqli_query($con, "SET CHARACTER SET utf8");
-    if(!$con)
+    $conn = mysqli_connect($my_host, $my_username, $my_password, $my_database);
+    mysqli_query($conn, "SET NAMES 'utf8'");
+    mysqli_query($conn, "SET CHARACTER SET utf8");
+    if(!$conn)
     {
         die("连接失败: " . mysqli_connect_error());
     }
-    return $con;
+    return $conn;
 }
 
 $name='Excelfile';    //生成的Excel文件文件名
 $res= new ExcelToArrary();
 $objPHPExcel = $res->set_para();
 
-$con = connectMysql("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$conn = connectMysql("172.16.155.11","doaj","Doa123!@#j", "doaj");
 $pagesize = 100; 
 $total_sql = "select COUNT(*) from doaj_data where id";
-$total_result = mysqli_query($con, $total_sql); 
+$total_result = mysqli_query($conn, $total_sql); 
 $total_row_arr = mysqli_fetch_row($total_result); 
 $total_row = $total_row_arr[0];   //总条数 
 //总页数 
@@ -84,7 +84,7 @@ $total = ceil($total_row / $pagesize);
 for ($i=0; $i < $total; $i++) {
     $offset = $i * $pagesize;
     $sql = "select * from doaj_data order by id limit {$offset},{$pagesize}";
-    $result = mysqli_query($con, $sql);
+    $result = mysqli_query($conn, $sql);
     while($sql_arr = mysqli_fetch_assoc($result))
     {
         $data_row[] = $sql_arr;

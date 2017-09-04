@@ -18,24 +18,12 @@
 <body>
 <h2>Doaj数据</h2>
 <?php
-function connectMysql($my_host, $my_username, $my_password, $my_database)
+require_once "mysqlTools.php";
+function selectData($conn, $select_sql, $pagesize)
 {
-    //连接数据库
-    $con = mysqli_connect($my_host, $my_username, $my_password, $my_database);
-    mysqli_query($con, "SET NAMES 'utf8'");
-    mysqli_query($con, "SET CHARACTER SET utf8");
-    if(!$con)
-    {
-        die("连接失败: " . mysqli_connect_error());
-    }
-    return $con;
-}
-
-function selectData($con, $select_sql, $pagesize)
-{
-    $total_result = mysqli_query($con, $select_sql); 
+    $total_result = mysqli_query($conn, $select_sql); 
     if (!$total_result) {
-     printf("Error: %s\n", mysqli_error($con));
+     printf("Error: %s\n", mysqli_error($conn));
      exit();
     }
     $total_row_arr = mysqli_fetch_row($total_result); 
@@ -66,8 +54,8 @@ function selectData($con, $select_sql, $pagesize)
     return $page_para;
 }
 
-
-$con = connectMysql("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$mysql_tools = new MysqlTools("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$conn = $mysql_tools->connectMysql();
 
 $pagesize = 100; 
 
@@ -75,7 +63,7 @@ $pagesize = 100;
 $total_sql = @$_GET['my_sql'] ? "select COUNT(*) ".strstr($_GET['my_sql'], "from doaj_data"):"select COUNT(*) from doaj_data"; 
 $chaxun = @$_GET['my_sql'] ? $_GET['my_sql'] : "";
 
-list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con, $total_sql, $pagesize);
+list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($conn, $total_sql, $pagesize);
 ?>
 
 <h3>
@@ -87,11 +75,14 @@ list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con
 </h3>
 
 <form action='' method='get'>
-总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：<input type="text" name="p"><input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" "><input type="submit" value="跳转">
+总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：
+<input type="text" name="p" style="width:50px">
+<input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" ">
+<input type="submit" value="跳转">
 </form> 
 
 <div style="margin:20px 0;"></div>
-<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 800px"
+<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 100%"
         data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1 - 副本.json',method:'get'">
 <!--      <thead data-options="frozen:true">
         <tr>
@@ -140,7 +131,7 @@ list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con
 
 <?php
 $sql = @$_GET['my_sql'] ? $_GET['my_sql'] . " order by id limit {$offset},{$pagesize}" : "select * from doaj_data order by id limit {$offset},{$pagesize}"; 
-$result = mysqli_query($con, $sql);
+$result = mysqli_query($conn, $sql);
 while($sql_arr = mysqli_fetch_assoc($result)){ 
         echo "<tr>";
         foreach ($sql_arr as $value) {
@@ -153,61 +144,20 @@ while($sql_arr = mysqli_fetch_assoc($result)){
 
 <form method="get" action="">
     查询语句：<textarea name="my_sql" rows="3" cols="40"></textarea>
-    <input type="submit" name="submit" value="查询">
-    <input type="button" name="export" onclick="window.location.href='getcustomer.php'" value="导出">
-</form> 
+    <input type="submit" name="submit" value="查询"> 
+</form>
+<form method="post" action="demo4_saveToCsv.php">
+    <input type="hidden" name="search" value="<?php echo $chaxun ?>">
+    <input type="button" name="export" onclick="window.location.href='demo4_saveToCsv.php'" value="导出">
+</form>
 
 <?php
 mysqli_free_result($result); 
-mysqli_close($con); 
+mysqli_close($conn); 
 ?>
 
 <?php 
 
-// header("Content-Type:text/html;charset=utf-8");
-
-// //引入PHPExcel库文件（路径根据自己情况）
-// include './phpexcel/Classes/PHPExcel.php';
-// //创建对象
-// $excel = new PHPExcel();
-// //Excel表格式,这里简略写了8列
-// $letter = array('A','B','C','D','E','F','F','G');
-// //表头数组
-// $tableheader = array('学号','姓名','性别','年龄','班级');
-// //填充表头信息
-// for($i = 0;$i < count($tableheader);$i++) 
-// {
-//     $excel->getActiveSheet()->setCellValue("$letter[$i]1","$tableheader[$i]");
-// }
-// $data = array(
-//             array('1','小王','男','20','100'),
-//             array('2','小李','男','20','101'),
-//             array('3','小张','女','20','102'),
-//             array('4','小赵','女','20','103')
-// );
-
-// //填充表格信息
-// for ($i = 2;$i <= count($data) + 1;$i++)
-// {
-//     $j = 0;
-//     foreach ($data[$i - 2] as $key=>$value) 
-//     {
-//         $excel->getActiveSheet()->setCellValue("$letter[$j]$i","$value");
-//         $j++;
-//     }
-// }
-// //创建Excel输入对象
-// $write = new PHPExcel_Writer_Excel5($excel);
-// header("Pragma: public");
-// header("Expires: 0");
-// header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
-// header("Content-Type:application/force-download");
-// header("Content-Type:application/vnd.ms-execl");
-// header("Content-Type:application/octet-stream");
-// header("Content-Type:application/download");;
-// header('Content-Disposition:attachment;filename="testdata.xls"');
-// header("Content-Transfer-Encoding:binary");
-// $write->save('php://output');
  ?>
 
 </body>

@@ -8,28 +8,22 @@
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/demo/demo.css">
     <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        function exportxlm()
+        {
+
+        }
+    </script>
 </head>
 <body>
 <h2>Doaj数据</h2>
 <?php
-function connectMysql($my_host, $my_username, $my_password, $my_database)
+require_once "mysqlTools.php";
+function selectData($conn, $select_sql, $pagesize)
 {
-    //连接数据库
-    $con = mysqli_connect($my_host, $my_username, $my_password, $my_database);
-    mysqli_query($con, "SET NAMES 'utf8'");
-    mysqli_query($con, "SET CHARACTER SET utf8");
-    if(!$con)
-    {
-        die("连接失败: " . mysqli_connect_error());
-    }
-    return $con;
-}
-
-function selectData($con, $select_sql, $pagesize)
-{
-    $total_result = mysqli_query($con, $select_sql); 
+    $total_result = mysqli_query($conn, $select_sql); 
     if (!$total_result) {
-     printf("Error: %s\n", mysqli_error($con));
+     printf("Error: %s\n", mysqli_error($conn));
      exit();
     }
     $total_row_arr = mysqli_fetch_row($total_result); 
@@ -60,8 +54,8 @@ function selectData($con, $select_sql, $pagesize)
     return $page_para;
 }
 
-
-$con = connectMysql("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$mysql_tools = new MysqlTools("172.16.155.11","doaj","Doa123!@#j", "doaj");
+$conn = $mysql_tools->connectMysql();
 
 $pagesize = 100; 
 
@@ -69,23 +63,23 @@ $pagesize = 100;
 $total_sql = @$_GET['my_sql'] ? "select COUNT(*) ".strstr($_GET['my_sql'], "from doaj_data"):"select COUNT(*) from doaj_data"; 
 $chaxun = @$_GET['my_sql'] ? $_GET['my_sql'] : "";
 
-list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con, $total_sql, $pagesize);
+list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($conn, $total_sql, $pagesize);
 ?>
 
 <h3>
-    <a href='page3.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
-    <a href='page3.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
-    <a href='page3.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
-    <a href='page3.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
-    <a href='page3.php'>返回</a>
+    <a href='test.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
+    <a href='test.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
+    <a href='test.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
+    <a href='test.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
+    <a href='test.php'>返回</a>
 </h3>
 
 <form action='' method='get'>
-总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：<input type="text" name="p"><input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" "><input type="submit" value="跳转">
+总条数：<?php echo $total_row;?> | 第 <?php echo $page;?>/<?php echo $total;?> 页 | 页码：<input type="text" name="p" style="width:50px"><input type="hidden" name="my_sql" value="<?php echo $chaxun ?>" "><input type="submit" value="跳转">
 </form> 
 
 <div style="margin:20px 0;"></div>
-<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 800px"
+<table class="easyui-datagrid" title="Frozen Columns in DataGrid" style="width:100%;height: 100%"
         data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1 - 副本.json',method:'get'">
 <!--      <thead data-options="frozen:true">
         <tr>
@@ -128,49 +122,19 @@ list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con
             <th data-options="field:'license_type',width:150">license_type</th>
             <th data-options="field:'license_title',width:150">license_title</th>
             <th data-options="field:'license_url',width:150">license_url</th>
+            <th data-options="field:'license_url',width:150">update_time</th>
         </tr>
     </thead>
 
-
 <?php
 $sql = @$_GET['my_sql'] ? $_GET['my_sql'] . " order by id limit {$offset},{$pagesize}" : "select * from doaj_data order by id limit {$offset},{$pagesize}"; 
-$result = mysqli_query($con, $sql);
+$result = mysqli_query($conn, $sql);
 while($sql_arr = mysqli_fetch_assoc($result)){ 
-        $id = $sql_arr['id'];
-        $title = $sql_arr['title'];
-        $title_translation = $sql_arr['title_translation'];
-        $abstract = $sql_arr['abstract'];
-        $abstract_translation = $sql_arr['abstract_translation'];
-        $year = $sql_arr['year'];
-        $url = $sql_arr['url'];
-        $start_page = $sql_arr['start_page'];
-        $end_page = $sql_arr['end_page'];
-        $article_created_date = $sql_arr['article_created_date'];
-        $article_last_updated = $sql_arr['article_last_updated'];
-        $journals_publisher = $sql_arr['journals_publisher'];
-        $journals_language = $sql_arr['journals_language'];
-        $journals_licenseId = $sql_arr['journals_licenseId'];
-        $journals_title = $sql_arr['journals_title'];
-        $journals_country = $sql_arr['journals_country'];
-        $journals_number = $sql_arr['journals_number'];
-        $journals_volume = $sql_arr['journals_volume'];
-        $journals_issns = $sql_arr['journals_issns'];
-        $journals_create_date = $sql_arr['journals_create_date'];
-        $term = $sql_arr['term'];
-        $term_code = $sql_arr['term_code'];
-        $term_l1 = $sql_arr['term_l1'];
-        $keyword = $sql_arr['keyword'];
-        $keyword_translation = $sql_arr['keyword_translation'];
-        $author_name = $sql_arr['author_name'];
-        $author_affiliation = $sql_arr['author_affiliation'];
-        $author_email = $sql_arr['author_email'];
-        $identifier_type = $sql_arr['identifier_type'];
-        $identifier_identifierId = $sql_arr['identifier_identifierId'];
-        $license_type = $sql_arr['license_type'];
-        $license_title = $sql_arr['license_title'];
-        $license_url = $sql_arr['license_url'];
-        echo "<tr><td>$id</td><td>$title</td><td>$title_translation</td><td>$abstract</td><td>$abstract_translation</td><td>$year</td><td>$url</td><td>$start_page</td><td>$end_page</td><td>$article_created_date</td><td>$article_last_updated</td><td>$journals_publisher</td><td>$journals_language</td><td>$journals_licenseId</td><td>$journals_title</td><td>$journals_country</td><td>$journals_number</td><td>$journals_volume</td><td>$journals_issns</td><td>$journals_create_date</td><td>$term</td>
-         <td>$term_code</td><td>$term_l1</td><td>$keyword</td><td>$keyword_translation</td><td>$author_name</td><td>$author_affiliation</td><td>$author_email</td><td>$identifier_type</td><td>$identifier_identifierId</td><td>$license_type</td><td>$license_title</td><td>$license_url</td></tr>";
+        echo "<tr>";
+        foreach ($sql_arr as $value) {
+            echo "<td>$value</td>";
+        }
+        echo "</tr>";
 } 
 ?>
 </table>
@@ -178,13 +142,14 @@ while($sql_arr = mysqli_fetch_assoc($result)){
 <form method="get" action="">
     查询语句：<textarea name="my_sql" rows="3" cols="40"></textarea>
     <input type="submit" name="submit" value="查询">
+    <input type="button" name="export" onclick="window.location.href='getcustomer.php'" value="导出">
 </form> 
-
 
 <?php
 mysqli_free_result($result); 
-mysqli_close($con); 
+mysqli_close($conn); 
 ?>
+
 
 </body>
 </html>
