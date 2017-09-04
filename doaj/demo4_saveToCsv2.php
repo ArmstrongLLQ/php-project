@@ -8,12 +8,17 @@
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.2/demo/demo.css">
     <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        function exportxlm()
+        {
+
+        }
+    </script>
 </head>
 <body>
 <h2>Doaj数据</h2>
 <?php
 require_once "mysqlTools.php";
-
 function selectData($conn, $select_sql, $pagesize)
 {
     $total_result = mysqli_query($conn, $select_sql); 
@@ -62,11 +67,11 @@ list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($con
 ?>
 
 <h3>
-    <a href='page.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
-    <a href='page.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
-    <a href='page.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
-    <a href='page.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
-    <a href='page.php'>返回</a>
+    <a href='test.php?my_sql=<?php echo $chaxun;?>'>首页</a> 丨 
+    <a href='test.php?p=<?php echo $pageprev;?>&my_sql=<?php echo $chaxun;?>'>上一页</a> | 
+    <a href='test.php?p=<?php echo $pagenext;?>&my_sql=<?php echo $chaxun;?>'>下一页</a> 丨 
+    <a href='test.php?p=<?php echo $total;?>&my_sql=<?php echo $chaxun;?>'>尾页</a> | 
+    <a href='test.php'>返回</a>
 </h3>
 
 <form action='' method='get'>
@@ -137,12 +142,14 @@ while($sql_arr = mysqli_fetch_assoc($result)){
 <form method="get" action="">
     查询语句：<textarea name="my_sql" rows="3" cols="40"></textarea>
     <input type="submit" name="submit" value="查询">
+    <input type="button" name="export" onclick="window.location.href='getcustomer.php'" value="导出">
 </form> 
 
 <?php
 mysqli_free_result($result); 
 mysqli_close($conn); 
 ?>
+
 
 </body>
 </html>
