@@ -45,7 +45,7 @@ function selectData($conn, $select_sql, $pagesize)
     return $page_para;
 }
 
-$pagesize = 10000; 
+$pagesize = 100000; 
 $total_sql = "select COUNT(*) from doaj_data";
 list($total, $page, $pageprev, $pagenext, $offset, $total_row) = selectData($conn, $total_sql, $pagesize);
 
