@@ -1,0 +1,3 @@
+defaultPHPServer=localhost
+eclipse.preferences.version=1
+phpServers=<server><apache2Location>C\:\\xampp\\apache\\conf</apache2Location><port>80</port><debuggerId>org.eclipse.php.debug.core.noneDebugger</debuggerId><document_root>D\:\\lilanqing\\Project\\php\\php-project\\doaj</document_root><serverType>org.zend.php.server.ui.types.LocalApacheType</serverType><name>localhost</name><base_url>http\://localhost</base_url><id>php-server-f28a8e79-6ee5-40a8-9366-410a62595d2a</id></server>

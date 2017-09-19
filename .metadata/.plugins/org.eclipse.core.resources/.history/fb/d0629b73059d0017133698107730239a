@@ -1,0 +1,41 @@
+<?php
+    // 这是一个工具类，完成对数据库的操作
+    class SqlHelper{
+        public $conn;
+        public $host = "172.16.155.11";
+        public $username = "doaj";
+        public $password = "Doa123!@#j";
+        public $dbname = "doaj";
+        
+        public function __construct(){
+            $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbname);
+            if (!$this->conn){
+                die("conn failed".mysqli_errno($this->conn));
+            }
+        }
+        
+        public function executeDql($sql){
+            $res = mysqli_query($this->conn, $sql);
+            return $res;
+        }
+        
+        public function executeDml($sql){
+            $b = mysqli_query($this->conn, $sql);
+            if (!$b){
+                return 0;
+            }else{
+                if (mysqli_affected_rows($this->conn) > 0){
+                    return 1;
+                }else{
+                    return 2;
+                }
+            }            
+        }
+        
+        public function closeConnect(){
+            if (empty($this->conn)){
+                mysqli_close($this->conn);
+            }
+        }
+    }
+?>

@@ -1,0 +1,7 @@
+<?php
+    require_once 'SqlHelper.class.php';
+    //该类是业务逻辑类，完成对doaj表的操作
+    class DoajService{
+        $sql = ""
+    }
+?>
