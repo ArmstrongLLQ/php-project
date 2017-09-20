@@ -3,8 +3,7 @@
     //该类是业务逻辑类，完成对doaj表的操作
     // 一个函数获取总共有多少页，
     class DoajService{
-        public function getPageCount($pagesize){
-           $sql = "select count(id) from doaj_data";
+        public function getPageCount($sql, $pagesize){
            $page_para = array();
            $sql_helper = new SqlHelper();
            $result = $sql_helper->executeDql($sql);

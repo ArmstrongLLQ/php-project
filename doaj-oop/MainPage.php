@@ -15,9 +15,10 @@
     require_once 'DoajService.class.php';
     
     $pagesize = 100;
+    $sql = "select count(id) from doaj_data";
     
     $doaj_service = new DoajService();
-    list($total_row,$page_count) = $doaj_service->getPageCount($pagesize); 
+    list($total_row,$page_count) = $doaj_service->getPageCount($sql, $pagesize); 
     $page_now = @$_POST['page_now'] ? $_POST['page_now'] : 1;
     //上一页 、下一页
     if ($page_now <= 1){

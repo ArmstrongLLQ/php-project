@@ -1,0 +1,6 @@
+<?php
+
+$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+$writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
+$result = $manager->executeBulkWrite('test.runoob', $bulk, $writeConcern);
+?>
