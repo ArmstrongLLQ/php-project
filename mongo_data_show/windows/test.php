@@ -11,7 +11,7 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>s
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -83,166 +83,50 @@
               动态信息
             </th>
             <th width="20%">
-              更多
+              时间
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <tr>
-            <td>
-              新华社 | <a href="#">菲大使馆sag倒萨范德萨发大水发放</a>
-            </td>
-            <td>
-              2017-09-30
-            </td>
-          </tr>
-          <tr class="info">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          </tr>
-          <!-- <tr class="success">
-            <td>
-              1
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-           
-          </tr>
-          <tr class="error">
-            <td>
-              2
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-          
-          </tr>
-          <tr class="warning">
-            <td>
-              3
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-           
-          </tr>
-          <tr class="info">
-            <td>
-              4
-            </td>
-            <td>
-              TB - Monthly
-            </td>
-           
-          </tr> -->
+        <?php 
+            require_once "BitcsService.class.php";
+            $bitcs_service = new BitcsService();
+            
+            $pagesize = 10;
+            $page_now = $_GET['p'] ? $_GET['p'] : 1;
+
+            $page_data = $bitcs_service->getPageData($page_now, $pagesize);
+            
+            foreach($page_data as $row){
+                echo "<tr>";
+                echo "<td>$row->Name | <a href='#'>$row->title</td><td>$row->time</td>";
+                echo "</tr>";
+            }
+            
+        ?>
         </tbody>
       </table>
       <ul class="pagination">
         <li>
-           <a href="#">Prev</a>
+           <a href="test.php?p=1">Prev</a>
         </li>
         <li>
-           <a href="#">1</a>
+           <a href="test.php?p=1">1</a>
         </li>
         <li>
-           <a href="#">2</a>
+           <a href="test.php?p=2">2</a>
         </li>
         <li>
-           <a href="#">3</a>
+           <a href="test.php?p=3">3</a>
         </li>
         <li>
-           <a href="#">4</a>
+           <a href="test.php?p=4">4</a>
         </li>
         <li>
-           <a href="#">5</a>
+           <a href="test.php?p=5">5</a>
         </li>
         <li>
-           <a href="#">Next</a>
+           <a href="test.php?p=5">Next</a>
         </li>
       </ul>
     </div>
