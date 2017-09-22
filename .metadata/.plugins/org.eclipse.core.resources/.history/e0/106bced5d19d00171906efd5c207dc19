@@ -1,5 +1,0 @@
-<?php
-$manager = new MongoDB();
-var_dump($manager);
-
-?>

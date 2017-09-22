@@ -18,14 +18,19 @@ $manager = new MongoDB\Driver\Manager("mongodb://bitcs:huajian2017@124.193.169.1
 //     'projection' => ['_id' => 0],
 //     'sort' => ['x' => -1],
 // ];
+$page = 0;
+$rows = 10;
 $filter = ['Category' => "新闻"];
+$options = [
+	"skip" => $page,
+	"limit" => $rows,
+];
 // 查询数据
-$query = new MongoDB\Driver\Query($filter);
+$query = new MongoDB\Driver\Query($filter, $options);
 $cursor = $manager->executeQuery('crawl.CrawlHtml', $query);
 
-foreach ($cursor as $document) {
-    print_r($document);
-}
+$response = $cursor->toArray();
+var_dump($response);
 ?>
 </body>
 </html>

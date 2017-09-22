@@ -11,7 +11,8 @@
 		}
 
 		public function executeDql($sql){
-			
+			$arr = array();
+			$res = 
 		}
 		 
 	}
