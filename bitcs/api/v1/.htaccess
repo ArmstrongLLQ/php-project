@@ -1,0 +1,6 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+# 重写规则
+RewriteRule ^contents$   index.php?class=contents [nc,qsa]
+RewriteRule ^menus$   index.php?class=menus [nc,qsa]

@@ -10,7 +10,7 @@
     <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 </head>
 <body>
-<h2>Doaj数据</h2>
+<h2 align="center">Doaj数据</h2>
 <?php 
     require_once 'DoajService.class.php';
     
