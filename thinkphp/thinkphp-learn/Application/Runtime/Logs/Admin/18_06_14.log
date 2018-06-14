@@ -1,0 +1,54 @@
+[ 2018-06-14T14:51:16+08:00 ] 127.0.0.1 /index.php/Admin/Dept/shilihua
+ERR: SQLSTATE[HY000] [2002] 由于目标计算机积极拒绝，无法连接。
+
+
+[ 2018-06-14T14:53:20+08:00 ] 127.0.0.1 /index.php/Admin/Dept/tianjia
+ERR: SQLSTATE[HY000] [2002] 由于目标计算机积极拒绝，无法连接。
+
+
+[ 2018-06-14T14:53:57+08:00 ] 127.0.0.1 /index.php/Admin/Dept/tianjia
+ERR: SQLSTATE[HY000] [2002] 由于目标计算机积极拒绝，无法连接。
+
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/css/base.css
+ERR: 闈炴硶鎿嶄綔:css
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/css/index.css
+ERR: 闈炴硶鎿嶄綔:css
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/jquery.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/css/jquery.dialog.css
+ERR: 闈炴硶鎿嶄綔:css
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/common.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/core.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/jquery.dialog.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/css/base.css
+ERR: 闈炴硶鎿嶄綔:css
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/css/home.css
+ERR: 闈炴硶鎿嶄綔:css
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/index.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/jquery.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:04:49+08:00 ] 127.0.0.1 /index.php/Admin/Index/js/common.js
+ERR: 闈炴硶鎿嶄綔:js
+
+[ 2018-06-14T16:07:08+08:00 ] 127.0.0.1 /index.php/Admin/Index/login.html
+ERR: 闈炴硶鎿嶄綔:login
+
+[ 2018-06-14T16:07:16+08:00 ] 127.0.0.1 /index.php/Admin/Index/login.html
+ERR: 闈炴硶鎿嶄綔:login
+
