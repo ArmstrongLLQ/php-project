@@ -20,5 +20,9 @@ class DeptController extends Controller{
 		$result = $model->add($data);
 		dump($result);
 	}
+
+	public function add(){
+		$this->display();
+	}
 }
 ?>
