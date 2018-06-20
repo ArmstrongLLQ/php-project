@@ -22,7 +22,29 @@ class DeptController extends Controller{
 	}
 
 	public function add(){
+		// 判断请求类型
+		if(IS_POST){
+			$post = I('post.');
+			// dump($post);
+			$model = M('Dept');
+			$result = $model->add($post);
+			if ($result) {
+				$this->success('添加成功', U('showList'), 1);
+			}else{
+				$this->error('添加失败');
+			}
+		}else{
+			// 查询出顶级部门
+			$model = M('Dept');
+			$data = $model->where('pid = 0')->select();
+			$this->assign('data', $data);
+			$this->display();
+		}
+	}
+
+	public function showList(){
 		$this->display();
 	}
+
 }
 ?>

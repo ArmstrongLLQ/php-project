@@ -41,8 +41,8 @@ $('.exit').click(function(){
 
 $('.exitDialog input[type=button]').click(function(e) {
     $('.exitDialog').Dialog('close');
-	
+
 	if($(this).hasClass('ok')){
-		window.location.href = "login.html"	;
+		window.location.href = "/index.php/Admin/Public/logout"	;
 	}
 });
