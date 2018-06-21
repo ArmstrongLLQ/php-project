@@ -32,7 +32,7 @@
             <volist name="data" id="vol">
                 <tr>
                     <td class="num">{$vol.id}</td>
-                    <td class="name">{$vol.level|str_repeat = '&emsp;',###*2}  {$vol.name}</td>
+                    <td class="name">{$vol.level|str_repeat = '&emsp;',###*2}{$vol.name}</td>
                     <td class="process">
                         <if condition='$vol.pid EQ 0'>顶级部门 <else/> {$vol.deptname} </if>
                     </td>
@@ -74,6 +74,11 @@
     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
     $("tbody").find("tr:odd").css("backgroundColor","#eee6fa");
 
+    $(function(){
+        $('.add').on('click', function(){
+            window.location.href="__CONTROLLER__/add";
+        })
+    })
 
     $(function(){
         $(".del").on('click',function(){

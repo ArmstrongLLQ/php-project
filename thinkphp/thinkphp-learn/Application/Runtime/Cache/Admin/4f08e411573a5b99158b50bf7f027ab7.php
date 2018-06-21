@@ -31,7 +31,7 @@
         <tbody>
             <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vol): $mod = ($i % 2 );++$i;?><tr>
                     <td class="num"><?php echo ($vol["id"]); ?></td>
-                    <td class="name"><?php echo (str_repeat( '&emsp;',$vol["level"]*2)); ?>  <?php echo ($vol["name"]); ?></td>
+                    <td class="name"><?php echo (str_repeat( '&emsp;',$vol["level"]*2)); echo ($vol["name"]); ?></td>
                     <td class="process">
                         <?php if($vol["pid"] == 0): ?>顶级部门 <?php else: ?> <?php echo ($vol["deptname"]); endif; ?>
                     </td>
@@ -72,6 +72,11 @@
     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
     $("tbody").find("tr:odd").css("backgroundColor","#eee6fa");
 
+    $(function(){
+        $('.add').on('click', function(){
+            window.location.href="/index.php/Admin/Dept/add";
+        })
+    })
 
     $(function(){
         $(".del").on('click',function(){

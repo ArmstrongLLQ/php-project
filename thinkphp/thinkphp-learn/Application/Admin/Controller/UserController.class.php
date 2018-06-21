@@ -1,13 +1,12 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class IndexController extends Controller{
-	public function index(){
+class UserController extends Controller{
+	public function showList(){
 		$this->display();
 	}
 
-	public function home(){
+	public function add(){
 		$this->display();
 	}
-
 }
