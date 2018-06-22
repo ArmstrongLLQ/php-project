@@ -54,7 +54,10 @@
                     <td class="tel"><?php echo ($vol["tel"]); ?></td>
                     <td class="email"><?php echo ($vol["email"]); ?></td>
                     <td class="addtime"><?php echo (date( 'Y-m-d H:i:s',$vol["addtime"])); ?></td>
-                    <td class="operate">操作</td>
+                    <td class="operate">
+                        <input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>">
+                        <a href="/index.php/Admin/User/edit/id/<?php echo ($vol["id"]); ?>/">编辑</a>
+                    </td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
         </tbody>
@@ -64,7 +67,7 @@
     <div class="pagin-list">
         <?php echo ($show); ?>
     </div>
-    <div class="pxofy">显示第1条到10条记录，总共<?php echo ($count); ?>条记录</div>
+    <div class="pxofy">显示第<?php echo ($page->firstRow + 1); ?>条到<?php echo ($page->firstRow + $page->listRows); ?>条记录，总共<?php echo ($page->totalRows); ?>条记录</div>
 </div>
 </body>
 <script src="/Public/Admin/js/jquery.js"></script>
@@ -91,6 +94,11 @@
     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
     $("tbody").find("tr:odd").css("backgroundColor","#eee6fa");
 
+    $(function(){
+        $(".add").on('click', function(){
+            window.location.href="/index.php/Admin/User/add/";
+        })
+    })
 
     $(function(){
         $(".del").on('click',function(){

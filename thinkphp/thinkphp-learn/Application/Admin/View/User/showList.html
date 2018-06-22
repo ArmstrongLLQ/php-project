@@ -55,7 +55,10 @@
                     <td class="tel">{$vol.tel}</td>
                     <td class="email">{$vol.email}</td>
                     <td class="addtime">{$vol.addtime|date = 'Y-m-d H:i:s',### }</td>
-                    <td class="operate">操作</td>
+                    <td class="operate">
+                        <input type="checkbox" class="deptid" value="{$vol.id}">
+                        <a href="__CONTROLLER__/edit/id/{$vol.id}/">编辑</a>
+                    </td>
                 </tr>
             </volist>
 
@@ -66,7 +69,7 @@
     <div class="pagin-list">
         {$show}
     </div>
-    <div class="pxofy">显示第1条到10条记录，总共{$count}条记录</div>
+    <div class="pxofy">显示第{$page->firstRow + 1}条到{$page->firstRow + $page->listRows}条记录，总共{$page->totalRows}条记录</div>
 </div>
 </body>
 <script src="__ADMIN__/js/jquery.js"></script>
@@ -93,6 +96,11 @@
     $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
     $("tbody").find("tr:odd").css("backgroundColor","#eee6fa");
 
+    $(function(){
+        $(".add").on('click', function(){
+            window.location.href="__CONTROLLER__/add/";
+        })
+    })
 
     $(function(){
         $(".del").on('click',function(){

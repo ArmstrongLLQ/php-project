@@ -1,0 +1,18 @@
+[ 2018-06-22T14:05:25+08:00 ] 127.0.0.1 /index.php/Admin/User/del/id/
+ERR: 非法操作:del
+
+[ 2018-06-22T15:02:27+08:00 ] 127.0.0.1 /index.php/Admin/User/del/id/
+ERR: 非法操作:del
+
+[ 2018-06-22T15:05:20+08:00 ] 127.0.0.1 /index.php/Admin/User/edit/id/%7Bvol.id%7D/
+ERR: 非法操作:edit
+
+[ 2018-06-22T15:05:48+08:00 ] 127.0.0.1 /index.php/Admin/User/edit/id/%7Bvol.id%7D/
+ERR: 非法操作:edit
+
+[ 2018-06-22T15:06:03+08:00 ] 127.0.0.1 /index.php/Admin/User/edit/id/3/
+ERR: 非法操作:edit
+
+[ 2018-06-22T15:13:20+08:00 ] 127.0.0.1 /index.php/Admin/User/del/id/
+ERR: 非法操作:del
+
