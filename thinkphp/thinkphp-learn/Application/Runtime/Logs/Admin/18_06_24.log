@@ -1,0 +1,12 @@
+[ 2018-06-24T18:03:18+08:00 ] 127.0.0.1 /index.php/Admin/Doc/download/id/2
+ERR: 非法操作:download
+
+[ 2018-06-24T18:17:21+08:00 ] 127.0.0.1 /index.php/Admin/Doc/download/id/11
+ERR: 非法操作:download
+
+[ 2018-06-24T18:17:24+08:00 ] 127.0.0.1 /index.php/Admin/Doc/download/id/2
+ERR: 非法操作:download
+
+[ 2018-06-24T18:54:32+08:00 ] 127.0.0.1 /index.php/Admin/Doc/download/id/16
+ERR: 非法操作:download
+
