@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class UserController extends Controller{
+
+class UserController extends CommonController{
 	public function showList(){
 		$model = M('User');
 		$count = $model->count();

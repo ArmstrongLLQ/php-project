@@ -1,0 +1,6 @@
+[ 2018-06-25T11:06:42+08:00 ] 127.0.0.1 /index.php/Admin/ddfa
+ERR: 非法操作:index
+
+[ 2018-06-25T11:08:01+08:00 ] 127.0.0.1 /index.php/Admin/Index/DDDD
+ERR: 非法操作:DDDD
+

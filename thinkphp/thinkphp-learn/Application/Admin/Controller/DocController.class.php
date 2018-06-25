@@ -1,7 +1,7 @@
 <?php 
 namespace Admin\Controller;
-use Think\Controller;
-class DocController extends Controller{
+
+class DocController extends CommonController{
 	public function add(){
 		if(IS_POST){
 			// 处理提交
@@ -53,7 +53,7 @@ class DocController extends Controller{
 
 		// 输出文件
 		header("Content-type: application/octet-stream");
-		header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+		header('Content-Disposition: attachment; filename=' . basename($file));
 		header("Content-Length: " . filesize($file));
 		// 输出缓存区
 		readfile($file);
