@@ -16,12 +16,12 @@ class EmailModel extends Model{
 				$post['hasfile'] = '1';
 				$post['filename'] = $info['name'];
 			}
-			// 补充字段from_id, addtime
-			$post['from_id'] = session('id');
-			$post['addtime'] = time();
-
-			return $this->add($post);
 		}
+		// 补充字段from_id, addtime
+		$post['from_id'] = session('id');
+		$post['addtime'] = time();
+
+		return $this->add($post);
 	}
 }
 ?>

@@ -22,7 +22,7 @@
             <tr>
                 <th class="id">序号</th>
                 <th class="name">收件人</th>
-                <th class="title">标题</th>
+                <th class="name">标题</th>
                 <th class="file">附件</th>
                 <th class="content">内容</th>
                 <th class="addtime">发送时间</th>
@@ -34,7 +34,7 @@
             <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vol): $mod = ($i % 2 );++$i;?><tr>
                     <td class="id"><?php echo ($vol["id"]); ?></td>
                     <td class="name"><?php echo ($vol["truename"]); ?> </td>
-                    <td class="title"><?php echo ($vol["title"]); ?> </td>
+                    <td class="name"><?php echo ($vol["title"]); ?> </td>
                     <td class="file"><?php if($vol["hasfile"] ==1): ?><a href="/index.php/Admin/Email/download/id/<?php echo ($vol["id"]); ?>"><?php echo ($vol["filename"]); ?> </a><?php endif; ?></td>
                     <td class="content"><?php echo (msubstr($vol["content"],0,10)); ?></td>
                     <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?>  </td>

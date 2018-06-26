@@ -22,7 +22,7 @@
             <tr>
                 <th class="id">序号</th>
                 <th class="name">收件人</th>
-                <th class="title">标题</th>
+                <th class="name">标题</th>
                 <th class="file">附件</th>
                 <th class="content">内容</th>
                 <th class="addtime">发送时间</th>
@@ -35,7 +35,7 @@
                 <tr>
                     <td class="id">{$vol.id}</td>
                     <td class="name">{$vol.truename} </td>
-                    <td class="title">{$vol.title} </td>
+                    <td class="name">{$vol.title} </td>
                     <td class="file"><if condition ="$vol.hasfile ==1"><a href="__CONTROLLER__/download/id/{$vol.id}">{$vol.filename} </a></if></td>
                     <td class="content">{$vol.content|msubstr=###,0,10}</td>
                     <td class="addtime">{$vol.addtime|date='Y-m-d H:i:s',###}  </td>
