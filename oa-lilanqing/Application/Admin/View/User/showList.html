@@ -10,11 +10,9 @@
 <body>
 <div class="title"><h2>信息管理</h2></div>
 <div class="table-operate ue-clear">
-    <a href="javascript:;" class="add">添加</a>
+    <a href="{:U('add')}" class="add">添加</a>
     <a href="javascript:;" class="del">删除</a>
-    <a href="javascript:;" class="edit">编辑</a>
     <a href="__CONTROLLER__/charts" class="count">统计</a>
-    <a href="javascript:;" class="check">审核</a>
 </div>
 <div class="table-box">
     <table>
@@ -30,6 +28,7 @@
                 <th class="email">邮箱</th>
                 <th class="addtime">添加时间</th>
                 <th class="operate">操作</th>
+                <th class="num">选择</th>
             </tr>
         </thead>
         <tbody>
@@ -49,13 +48,15 @@
                     <td class="num">{$vol.id}</td>
                     <td class="name">{$vol.username}</td>
                     <td class="nickname">{$vol.nickname}</td>
-                    <td class="dept_id">{$vol.dept_id}</td>
+                    <td class="dept_id">{$vol.deptname}</td>
                     <td class="sex">{$vol.sex}</td>
                     <td class="birthday">{$vol.birthday}</td>
                     <td class="tel">{$vol.tel}</td>
                     <td class="email">{$vol.email}</td>
                     <td class="addtime">{$vol.addtime|date = 'Y-m-d H:i:s',### }</td>
-                    <td class="operate">操作</td>
+                    <td class="operate"><a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>&nbsp&nbsp
+                        <a href="__CONTROLLER__/del/id/{$vol.id}">删除</a></td>
+                    <td class="num"><input type="checkbox" class="deptid" value="{$vol.id}"></td>
                 </tr>
             </volist>
 

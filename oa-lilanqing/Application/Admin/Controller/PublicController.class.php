@@ -43,18 +43,22 @@ class PublicController extends Controller{
 					// 删除验证码元素
 					unset($data['captcha']);
 					// 查询
-					$data = $model->where($post)->find();
+					$chaxun = $model2->where($data)->find();
 					// 判断是否存在用户
-					if($data){
+					if($chaxun){
 						// 存在，用户信息保存到session中，跳转到后台首页
-						session('id', $data['id']);
-						session('username', $data['username']);
-						session('role_id', $data['role_id']);
+						session('id', $chaxun['id']);
+						session('username', $chaxun['username']);
+						session('role_id', $chaxun['role_id']);
 
 						$this->redirect('Index/index');
 					}else{
 						// 不存在
-						$this->error('用户名或密码错误');
+						$error = array('username'=>'用户名或密码错误');
+						$placeholder = array('username'=>$data['username']);
+						$this->assign('placeholder', $placeholder);
+						$this->assign('error', $error);
+						$this->display();
 					}
 				}else{
 					$error = array('captcha'=>'验证码错误');

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-<div class="title"><h2>信息登记</h2></div>
+<div class="title"><h2>部门管理</h2></div>
 <form action ="" method="post">
     <div class="main">
         <p class="short-input ue-clear">
