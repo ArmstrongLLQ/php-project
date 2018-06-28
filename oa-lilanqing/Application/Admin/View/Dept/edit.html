@@ -7,13 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-<div class="title"><h2>信息登记</h2></div>
+<div class="title"><h2>部门管理</h2></div>
 <form action ="" method="post">
     <div class="main">
         <p class="short-input ue-clear">
             <label>部门名称：</label>
             <input type="text" name="name" value="{$data.name}" placeholder="部门名称">
             <input type="hidden" name="id" value="{$data.id}">
+            <span name="error" style="color: red;">{$error.name}</span>
         </p>
         <div class="short-input select ue-clear">
             <label>上级部门：</label>
@@ -29,6 +30,7 @@
         <p class="short-input ue-clear">
             <label>排序：</label>
             <input type="text" name="sort" value="{$data.sort}" placeholder="排序">
+            <span name="error" style="color: red;">{$error.sort}</span>
         </p>
         <p class="short-input ue-clear">
             <label>备注：</label>

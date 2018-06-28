@@ -8,23 +8,26 @@
 </head>
 <body>
     <div id="container">
-    <form action="<?php echo U('checkLogin');?>" method="post">
+    <form action="" method="post">
         <div id="bd">
             <div class="login1">
                 <div class="login-top"><h1 class="logo"></h1></div>
                 <div class="login-input">
                     <p class="user ue-clear">
                         <label>用户名</label>
-                        <input type="text" name="username" />
+                        <input type="text" name="username" placeholder="<?php echo ($placeholder["username"]); ?>" />
+                        <span name="error" style="color: red;"><?php echo ($error["username"]); ?></span>
                     </p>
                     <p class="password ue-clear">
                         <label>密&nbsp;&nbsp;&nbsp;码</label>
-                        <input type="text" name="password" />
+                        <input type="password" name="password" />
+                        <span name="error" style="color: red;"><?php echo ($error["password"]); ?></span>
                     </p>
                     <p class="yzm ue-clear">
                         <label>验证码</label>
                         <input type="text" name="captcha" maxlength="4" />
                         <cite><img style="margin:0px" src="/index.php/Admin/Public/captcha" onclick="this.src='/index.php/Admin/Public/captcha/t/'+Math.random()" /></cite>
+                        <span name="error" style="color: red;"><?php echo ($error["captcha"]); ?></span>
                     </p>
                 </div>
                 <div class="login-btn ue-clear">

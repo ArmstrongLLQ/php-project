@@ -8,13 +8,11 @@
     <title>移动办公自动化系统</title>
 </head>
 <body>
-<div class="title"><h2>信息管理</h2></div>
+<div class="title"><h2>部门管理</h2></div>
 <div class="table-operate ue-clear">
-    <a href="javascript:;" class="add">添加</a>
+    <a href="<?php echo U('add');?>" class="add">添加</a>
     <a href="javascript:;" class="del">删除</a>
-    <a href="javascript:;" class="edit">编辑</a>
     <a href="javascript:;" class="count">统计</a>
-    <a href="javascript:;" class="check">审核</a>
 </div>
 <div class="table-box">
     <table>
@@ -26,6 +24,7 @@
                 <th class="node">排序</th>
                 <th class="time">备注</th>
                 <th class="operate">操作</th>
+                <th class="num">选择</th>
             </tr>
         </thead>
         <tbody>
@@ -38,9 +37,10 @@
                     <td class="node"><?php echo ($vol["sort"]); ?></td>
                     <td class="time"><?php echo ($vol["remark"]); ?></td>
                     <td class="operate">
-                    <input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>">
-                    <a href="/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>
+                    <a href="/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>&nbsp&nbsp
+                    <a href="/index.php/Admin/Dept/del/id/<?php echo ($vol["id"]); ?>">删除</a>
                     </td>
+                    <td class="num"><input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"></td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
         </tbody>
@@ -80,12 +80,13 @@
             //循环遍历idobj对象，获取其中的每一个的值。
             for(var i = 0;i < idObj.length;i++){
                 id = id + idObj[i].value + ',';
-            }
+            };
             //去掉最后的逗号
             id = id.substring(0,id.length-1);
             console.log(id);
             window.location.href="/index.php/Admin/Dept/del/id/" + id;
-        })
-    })
+        });
+    });
+
 </script>
 </html>
